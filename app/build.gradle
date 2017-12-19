@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.conchoidal.mhvan.andrioidassignment2"
-        minSdkVersion 22
+        applicationId "com.conchoidal.mhvan.androidassignment2"
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
