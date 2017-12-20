@@ -52,6 +52,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="161dp"
         android:layout_height="59dp"
+        android:onClick="loginClick"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textSize="30sp"

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         editPassword = (EditText) findViewById(R.id.editPassword);
     }
 
-    public void searchClick(View v) {
+    public void loginClick(View v) {
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
 
