@@ -18,13 +18,17 @@ public class MainActivity extends AppCompatActivity {
     int userId;
     EditText editEmail;
     EditText editPassword;
-
+    DBHelper dbHelp;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
+        DBHelper dbHelp = new DBHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelp.getReadableDatabase();
+        dbHelp.onUpgrade(db, 1, 2);
     }
 
     public void loginClick(View v) {
