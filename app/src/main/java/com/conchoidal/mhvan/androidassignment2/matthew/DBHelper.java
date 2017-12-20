@@ -68,7 +68,8 @@ public class DBHelper extends SQLiteOpenHelper {
             LASTNAME + " TEXT," +
             CREDITCARD + " TEXT," +
             ADDRESS + " TEXT," +
-            POSTALCODE + " TEXT" +  ")";
+            POSTALCODE + " TEXT" +
+            ")";
 
     public static final String TABLE_BOOKEDFLIGHT = "table_bookedflight";
     public static final String BOOKEDFLIGHTID = "bookedFlightId";
@@ -77,7 +78,8 @@ public class DBHelper extends SQLiteOpenHelper {
             TABLE_BOOKEDFLIGHT + "(" +
             BOOKEDFLIGHTID + "INTEGER PRIMARY KEY," +
             USERID + " INTEGER," +
-            FLIGHTID + " INTEGER" +  ")";
+            FLIGHTID + " INTEGER" +
+            ")";
 
     public void onCreate(SQLiteDatabase db) {
     }
