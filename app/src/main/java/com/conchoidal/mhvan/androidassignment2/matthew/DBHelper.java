@@ -13,10 +13,10 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "hospital.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "flight.db";
+    public static final int DATABASE_VERSION = 3;
 
-    DBHelper (Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     //Flight table + create statement
@@ -189,6 +189,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return isVaild;
     }
 
+    public boolean searchUserEmail (String email, SQLiteDatabase db) {
+        boolean isVaild = false;
+        //Search for user
+        String selectQuery = "SELECT * FROM table_user WHERE email = " + email ;
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.getCount() > 0) {
+            isVaild = true;
+        }
+        Log.d("Database", "User.email cursor count = " + c.getCount() + ". isValid = " + isVaild + ".");
+        return isVaild;
+    }
+
     public boolean searchBookedFlight (int bookedFlightId, SQLiteDatabase db) {
         boolean isVaild = false;
         //Search for user
@@ -218,6 +231,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor returnUserRow(int userId, SQLiteDatabase db) {
         String selectQuery = "SELECT * FROM table_user WHERE userId = " + userId ;
+        Cursor c;
+        c = db.rawQuery(selectQuery, null);
+        Log.d("Database", "1 : Cursor index = " + c);
+        if (c == null) {
+            Log.d("Database", "2 : Cursor == null!");
+        }
+        c.moveToFirst();
+        Log.d("Database", "3 : Cursor index = " + c);
+        return c;
+    }
+
+    public Cursor returnUserEmailRow(String email, SQLiteDatabase db) {
+        String selectQuery = "SELECT * FROM table_user WHERE email = " + email ;
         Cursor c;
         c = db.rawQuery(selectQuery, null);
         Log.d("Database", "1 : Cursor index = " + c);
