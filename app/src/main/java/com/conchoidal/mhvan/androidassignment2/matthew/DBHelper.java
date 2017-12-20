@@ -163,7 +163,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public boolean searchFlight (int flightId, SQLiteDatabase db) {
         boolean isVaild = false;
-        //Search for nurse
+        //Search for flight
         String selectQuery = "SELECT * FROM table_flight WHERE flightId = " + flightId ;
         Cursor c = db.rawQuery(selectQuery, null);
 
@@ -177,7 +177,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean searchUser (int userId, SQLiteDatabase db) {
         boolean isVaild = false;
-        //Search for nurse
+        //Search for user
         String selectQuery = "SELECT * FROM table_user WHERE userId = " + userId ;
         Cursor c = db.rawQuery(selectQuery, null);
 
@@ -186,6 +186,20 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         Log.d("Database", "User cursor count = " + c.getCount() + ". isValid = " + isVaild + ".");
+        return isVaild;
+    }
+
+    public boolean searchBookedFlight (int bookedFlightId, SQLiteDatabase db) {
+        boolean isVaild = false;
+        //Search for user
+        String selectQuery = "SELECT * FROM table_bookedflight WHERE userId = " + bookedFlightId ;
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.getCount() > 0) {
+            isVaild = true;
+        }
+
+        Log.d("Database", "Booked flight cursor count = " + c.getCount() + ". isValid = " + isVaild + ".");
         return isVaild;
     }
 
