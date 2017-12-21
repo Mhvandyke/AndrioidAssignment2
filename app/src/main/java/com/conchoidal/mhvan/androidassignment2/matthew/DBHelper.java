@@ -14,7 +14,7 @@ import android.util.Log;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "flight.db";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 5;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,6 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CREDITCARD = "creditCard";
     public static final String ADDRESS = "address";
     public static final String POSTALCODE = "postalCode";
+    public static final String USERNAME = "username";
 
 
 
@@ -68,7 +69,8 @@ public class DBHelper extends SQLiteOpenHelper {
             LASTNAME + " TEXT," +
             CREDITCARD + " TEXT," +
             ADDRESS + " TEXT," +
-            POSTALCODE + " TEXT" +
+            POSTALCODE + " TEXT," +
+            USERNAME + " TEXT" +
             ")";
 
     public static final String TABLE_BOOKEDFLIGHT = "table_bookedflight";
@@ -92,8 +94,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKEDFLIGHT);
 
         db.execSQL(CREATE_TABLE_FLIGHT);
+        Log.d("Database", "Running statement: " + CREATE_TABLE_FLIGHT);
         db.execSQL(CREATE_TABLE_USER);
+        Log.d("Database", "Running statement: " + CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_BOOKEDFLIGHT);
+        Log.d("Database", "Running statement: " + CREATE_TABLE_BOOKEDFLIGHT);
 
         Log.d("Database", "Tables created!");
         //Create flights
@@ -111,9 +116,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Create users
         Log.d("Database", "Creating users");
-        User user1 = new User("admin@adminmail.com", "admin", "Admin", "Nimda", "1234567890123456", "123 Fake St.", "A1A-1A1");
-        User user2 = new User("rick.sanchez@gmail.com", "morty", "Rick", "Sanchez", "3127345689074326", "64 Washington Lane" , "M3P-9A6");
-        User user3 = new User("mccarm416@gmail.com", "password", "Matthew" , "McCarthy" ,"5150342001763654", "66 Kendrick Blvd.", "G0P-6A9");
+        User user1 = new User("admin@adminmail.com", "admin", "Admin", "Nimda", "1234567890123456", "123 Fake St.", "A1A-1A1", "admin");
+        User user2 = new User("rick.sanchez@gmail.com", "morty", "Rick", "Sanchez", "3127345689074326", "64 Washington Lane" , "M3P-9A6", "rsanchez");
+        User user3 = new User("mccarm416@gmail.com", "password", "Matthew" , "McCarthy" ,"5150342001763654", "66 Kendrick Blvd.", "G0P-6A9", "matthew");
         insertUser(user1, db);
         insertUser(user2, db);
         insertUser(user3, db);
@@ -134,10 +139,12 @@ public class DBHelper extends SQLiteOpenHelper {
         userValues.put("firstName", user.getFirstName());
         userValues.put("lastName", user.getLastName());
         userValues.put("creditCard", user.getCreditCard());
-        userValues.put("address", user.getPostalCode());
+        userValues.put("address", user.getAddress());
+        userValues.put("postalCode", user.getPostalCode());
+        userValues.put("username", user.getUsername());
         Log.d("Database", "Inserting user...");
-        db.insert(TABLE_FLIGHT, null, userValues);
-        Log.d("Database", "Doctor " + user.getFirstName() + " has been inserted to the databse.");
+        db.insert(TABLE_USER, null, userValues);
+        Log.d("Database", "User " + user.getFirstName() + " has been inserted to the database.");
     }
 
     public void insertFlight (Flight flight, SQLiteDatabase db ) {
@@ -191,16 +198,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return isVaild;
     }
 
-    public boolean searchUserEmail (String email, SQLiteDatabase db) {
+    public boolean searchUserUname (String username, SQLiteDatabase db) {
+        Log.d("Database", "Searching username...");
         boolean isVaild = false;
         //Search for user
-        String selectQuery = "SELECT * FROM table_user WHERE email = " + email ;
+        Log.d("Database", "Running statement: \"SELECT * FROM table_user WHERE username = \"" + username + "\"");
+        String selectQuery = "SELECT * FROM table_user WHERE username = \"" + username + "\"";
         Cursor c = db.rawQuery(selectQuery, null);
 
         if (c.getCount() > 0) {
             isVaild = true;
         }
-        Log.d("Database", "User.email cursor count = " + c.getCount() + ". isValid = " + isVaild + ".");
+        Log.d("Database", "User.username cursor count = " + c.getCount() + ". isValid = " + isVaild + ".");
         return isVaild;
     }
 
@@ -244,8 +253,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public Cursor returnUserEmailRow(String email, SQLiteDatabase db) {
-        String selectQuery = "SELECT * FROM table_user WHERE email = " + email ;
+    public Cursor returnUserUnameRow(String username, SQLiteDatabase db) {
+        String selectQuery = "SELECT * FROM table_user WHERE username = \"" + username + "\"";
         Cursor c;
         c = db.rawQuery(selectQuery, null);
         Log.d("Database", "1 : Cursor index = " + c);

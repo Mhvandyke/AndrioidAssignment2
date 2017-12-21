@@ -16,7 +16,7 @@ import com.conchoidal.mhvan.androidassignment2.matthew.DBHelper;
 public class MainActivity extends AppCompatActivity {
 
     int userId;
-    EditText editEmail;
+    EditText editUsername;
     EditText editPassword;
     DBHelper dbHelp;
     SQLiteDatabase db;
@@ -24,34 +24,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editEmail = (EditText) findViewById(R.id.editEmail);
+        editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPassword);
-        DBHelper dbHelp = new DBHelper(getApplicationContext());
-        SQLiteDatabase db = dbHelp.getReadableDatabase();
+        dbHelp = new DBHelper(getApplicationContext());
+        db = dbHelp.getReadableDatabase();
         dbHelp.onUpgrade(db, 1, 2);
     }
 
     public void loginClick(View v) {
-        String email = editEmail.getText().toString();
+        String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
         DBHelper dbHelp = new DBHelper(getApplicationContext());
         SQLiteDatabase db = dbHelp.getReadableDatabase();
+        Log.d("Database", "Database = " + db);
+        Log.d("Database", "Username = " + username);
+        Log.d("Database", "Password = " + password);
 
-        if(dbHelp.searchUserEmail(email, db)) {
-            Cursor c = dbHelp.returnUserEmailRow(email, db);
+        if(dbHelp.searchUserUname(username, db)) {
+            Log.d("Database", "Username exists. Checking password.");
+            Cursor c = dbHelp.returnUserUnameRow(username, db);
             String tempPassword = c.getString(c.getColumnIndex("password"));
+            Log.d("Database", "Comparing password.");
             if(password.equals(tempPassword)) {
-                Log.d("Database", "Email:" + email + "/Password:" + password + " has been verified!");
+                Log.d("Database", "Password match.");
+                Log.d("Database", "User:" + username + "/Password:" + password + " has been verified!");
                 userId = c.getInt(c.getColumnIndex("userId"));
                 nextScreen();
             }
             else {
+                Log.d("Database", "Password mismatch.");
                 Toast.makeText(getApplicationContext(), "Invalid password!", Toast.LENGTH_SHORT).show();
             }
         }
         else {
-            Toast.makeText(getApplicationContext(), "Email not found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Username not found!", Toast.LENGTH_SHORT).show();
         }
 
     }
