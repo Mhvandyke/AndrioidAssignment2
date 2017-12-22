@@ -266,4 +266,35 @@ public class DBHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    //UPDATE COMPANY SET ADDRESS = 'Texas' WHERE ID = 6;
+
+    public void updateUser (User user, SQLiteDatabase db ) {
+        Log.d("Database", "Updating user " + user.getFirstName() + " to enter database.");
+        ContentValues userValues = new ContentValues();
+        int userId = user.getUserId();
+        String email = user.getEmail();
+        String password =  user.getPassword();
+        String firstName = user.getFirstName();
+        String lastName =  user.getLastName();
+        String creditCard = user.getCreditCard();
+        String address =  user.getAddress();
+        String postalCode = user.getPostalCode();
+        String username = user.getUsername();
+        String UPDATEUSER =
+                "UPDATE table_user SET " +
+                "email = \"" + email + "\", " +
+                "password = \"" + password + "\", " +
+                "firstName = \"" + firstName + "\", " +
+                "lastName = \"" + lastName + "\", " +
+                "creditCard = \"" + creditCard + "\", " +
+                "address = \"" +  address + "\", " +
+                "postalCode = \"" + postalCode + "\", " +
+                "username = \"" + username +
+                "\" WHERE userId = " + userId + ";";
+        Log.d("Database", "Inserting user...");
+        Log.d("Database", "Running statement: " + UPDATEUSER);
+        db.execSQL(UPDATEUSER);
+        Log.d("Database", "User " + user.getFirstName() + " has been updated in the database.");
+    }
+
 }

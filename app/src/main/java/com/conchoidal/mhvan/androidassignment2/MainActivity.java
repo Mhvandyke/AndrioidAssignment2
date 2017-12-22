@@ -14,7 +14,6 @@ import com.conchoidal.mhvan.androidassignment2.matthew.DBHelper;
 
 
 public class MainActivity extends AppCompatActivity {
-
     int userId;
     EditText editUsername;
     EditText editPassword;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nextScreen(){
-        Intent i = new Intent(MainActivity.this, MainMenu.class);
+        Intent i = new Intent(MainActivity.this, EditUser.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }
