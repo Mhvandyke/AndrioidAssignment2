@@ -1,4 +1,5 @@
 package com.conchoidal.mhvan.androidassignment2.matthew;
+
 /**
  * Created by matt on 12/20/17.
  */
@@ -43,3 +44,4 @@ public class BookedFlight {
         this.flightId = flightId;
     }
 }
+

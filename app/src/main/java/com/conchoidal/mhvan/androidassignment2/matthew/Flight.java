@@ -118,5 +118,5 @@ public class Flight {
     public void setTravelTime(String travelTime) {
         this.travelTime = travelTime;
     }
-
 }
+
