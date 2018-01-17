@@ -24,6 +24,8 @@
             android:name=".matthew.BookFlight"
             android:label="@string/title_activity_book_flight"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MainMenu" />
+        <activity android:name=".EditUser"></activity>
     </application>
 
 </manifest>

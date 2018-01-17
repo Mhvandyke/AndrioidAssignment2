@@ -14,11 +14,11 @@ public class User {
     private String creditCard;
     private String address;
     private String postalCode;
-
+    private String username;
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, String creditCard, String address, String postalCode) {
+    public User(String email, String password, String firstName, String lastName, String creditCard, String address, String postalCode, String username) {
         this.userId = nextUserId;
         this.email = email;
         this.password = password;
@@ -27,7 +27,20 @@ public class User {
         this.creditCard = creditCard;
         this.address = address;
         this.postalCode = postalCode;
+        this.username = username;
         nextUserId++; //Auto-increment nextUserId every time a new user is created
+    }
+
+    public User(int userId, String email, String password, String firstName, String lastName, String creditCard, String address, String postalCode, String username) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.creditCard = creditCard;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.username = username;
     }
 
     public int getUserId() {
@@ -94,4 +107,11 @@ public class User {
         this.postalCode = postalCode;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
