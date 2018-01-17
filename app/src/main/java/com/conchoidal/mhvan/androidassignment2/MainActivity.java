@@ -1,11 +1,6 @@
 package com.conchoidal.mhvan.androidassignment2;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-
-import com.conchoidal.mhvan.androidassignment2.sean.EditProfileActivity;
-import com.conchoidal.mhvan.androidassignment2.sean.SearchFlightsActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -28,34 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Button that sends to flights page
-        Button flights = (Button)findViewById(R.id.searchflight);
-       final Intent flight_intent = new Intent(this, SearchFlightsActivity.class);
-
-        //on click
-        flights.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(flight_intent);
-            }
-        });
-
-
-        //Button that sends to prpfile page
-        Button profile = (Button)findViewById(R.id.editprofile);
-        final Intent profile_intent = new Intent(this, EditProfileActivity.class);
-
-        //on click
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(profile_intent);
-            }
-        });
-
-
-
         editUsername = (EditText) findViewById(R.id.editUsername);
         editPassword = (EditText) findViewById(R.id.editPassword);
         dbHelp = new DBHelper(getApplicationContext());
@@ -96,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nextScreen(){
-        Intent i = new Intent(MainActivity.this, EditUser.class);
+        Intent i = new Intent(MainActivity.this, MainMenu.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }

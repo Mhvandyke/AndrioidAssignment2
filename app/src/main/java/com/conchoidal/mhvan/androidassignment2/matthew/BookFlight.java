@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conchoidal.mhvan.androidassignment2.MainActivity;
+import com.conchoidal.mhvan.androidassignment2.MainMenu;
 import com.conchoidal.mhvan.androidassignment2.R;
 
 public class BookFlight extends AppCompatActivity {
@@ -89,7 +90,7 @@ public class BookFlight extends AppCompatActivity {
         Toast.makeText(this, "Flight #" + flightNum + " has been booked!", Toast.LENGTH_LONG).show();
     }
     public void BackButton(View view){
-        Intent i = new Intent(activity_main_menu, MainMenu.class);
+        Intent i = new Intent(BookFlight.this, MainMenu.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }

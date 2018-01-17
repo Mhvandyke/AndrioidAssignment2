@@ -1,4 +1,4 @@
-package Michael;
+package com.conchoidal.mhvan.androidassignment2;
 
 /**
  * Created by mhvan on 2017-12-20.
@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.conchoidal.mhvan.androidassignment2.MainActivity;
 import com.conchoidal.mhvan.androidassignment2.R;
+import com.conchoidal.mhvan.androidassignment2.matthew.DBHelper;
+import com.conchoidal.mhvan.androidassignment2.matthew.User;
 
 
 public class CreateUser extends AppCompatActivity {
