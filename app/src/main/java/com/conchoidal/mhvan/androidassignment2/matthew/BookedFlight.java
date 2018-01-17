@@ -44,3 +44,4 @@ public class BookedFlight {
         this.flightId = flightId;
     }
 }
+

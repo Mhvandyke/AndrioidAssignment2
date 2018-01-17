@@ -267,6 +267,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return c;
     }
 
+
     //UPDATE COMPANY SET ADDRESS = 'Texas' WHERE ID = 6;
 
     public void updateUser (User user, SQLiteDatabase db ) {

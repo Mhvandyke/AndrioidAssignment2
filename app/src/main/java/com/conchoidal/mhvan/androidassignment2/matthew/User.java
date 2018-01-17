@@ -31,6 +31,7 @@ public class User {
         nextUserId++; //Auto-increment nextUserId every time a new user is created
     }
 
+
     public User(int userId, String email, String password, String firstName, String lastName, String creditCard, String address, String postalCode, String username) {
         this.userId = userId;
         this.email = email;
@@ -42,7 +43,6 @@ public class User {
         this.postalCode = postalCode;
         this.username = username;
     }
-
     public int getUserId() {
         return userId;
     }
