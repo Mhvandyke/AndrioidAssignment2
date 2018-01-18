@@ -60,9 +60,12 @@ public class BookFlight extends AppCompatActivity {
     }
 
     public void getVariablesFromDB(){
+        dbHelp = new DBHelper(getApplicationContext());
         db = dbHelp.getReadableDatabase();
-        Cursor c = dbHelp.returnFlightRow(flightId, db);
         dbHelp.onUpgrade(db, 1, 2);
+
+
+        Cursor c = dbHelp.returnFlightRow(flightId, db);
         destination = c.getString(c.getColumnIndex("destination"));
         origin = c.getString(c.getColumnIndex("origin"));
         arriveDate = c.getString(c.getColumnIndex("arriveDate"));

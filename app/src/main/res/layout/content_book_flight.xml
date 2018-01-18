@@ -85,7 +85,6 @@
         android:id="@+id/costText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bookFlightButton"
         android:layout_margin="5dp"
         android:text="Price: "
         android:textSize="15sp" />
