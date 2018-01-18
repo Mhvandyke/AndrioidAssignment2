@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         DBHelper dbHelp = new DBHelper(getApplicationContext());
         SQLiteDatabase db = dbHelp.getReadableDatabase();
+        dbHelp.onUpgrade(db, 1, 2);
         Log.d("Database", "Database = " + db);
         Log.d("Database", "Username = " + username);
         Log.d("Database", "Password = " + password);

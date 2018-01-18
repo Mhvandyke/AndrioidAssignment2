@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.conchoidal.mhvan.androidassignment2.MainActivity;
 import com.conchoidal.mhvan.androidassignment2.MainMenu;
@@ -20,64 +21,67 @@ public class BookFlight extends AppCompatActivity {
     DBHelper dbHelp;
     SQLiteDatabase db;
     int userId;
+    int flightNumber;
     int flightId;
     String destination;
-    int flightNum;
+    String flightNum;
     String origin;
     String departDate;
     String departTime;
     String arriveDate;
     String arriveTime;
     String travelTime;
-    Double cost;
+    String cost;
     BookedFlight bookedFlight;
-    TextView flightNumText = (TextView)findViewById(R.id.flightNumText);
-    TextView destinationText = (TextView)findViewById(R.id.destinationText);
-    TextView originText = (TextView)findViewById(R.id.originText);
-    TextView departDateText = (TextView)findViewById(R.id.departDateText);
-    TextView departTimeText = (TextView)findViewById(R.id.departTimeText);
-    TextView arriveDateText = (TextView)findViewById(R.id.arriveDateText);
-    TextView arriveTimeText = (TextView)findViewById(R.id.arriveTimeText);
-    TextView costText = (TextView)findViewById(R.id.costText);
-    TextView travelTimeText = (TextView)findViewById(R.id.travelTimeText);
+    Cursor c;
+    TextView flightNumText;
+    TextView destinationText;
+    TextView originText;
+    TextView departDateText;
+    TextView departTimeText;
+    TextView arriveDateText;
+    TextView arriveTimeText;
+    TextView costText;
+    TextView travelTimeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Bundle extras = getIntent().getExtras();
+        userId = extras.getInt("userId");
+        flightNumber = extras.getInt("flightNumber");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_flight);
-        getLastPageInfo();
-        getVariablesFromDB();
-        setTextFields();
+        Log.d("BookFlight", "on create" + userId + " "+ flightNumber);
 
-    }
-    public void getLastPageInfo(){
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userId = extras.getInt("userId");
-            flightId = extras.getInt("flightId");
-            bookedFlight = new BookedFlight(userId, flightId);
-        }
-    }
-
-    public void getVariablesFromDB(){
         dbHelp = new DBHelper(getApplicationContext());
         db = dbHelp.getReadableDatabase();
         dbHelp.onUpgrade(db, 1, 2);
-
-
-        Cursor c = dbHelp.returnFlightRow(flightId, db);
+        c = dbHelp.returnFlightRow(flightNumber, db);
+        Log.d("BookFlight", "test = " + c);
         destination = c.getString(c.getColumnIndex("destination"));
+        Log.d("BookFlight", "destination = " + destination);
         origin = c.getString(c.getColumnIndex("origin"));
         arriveDate = c.getString(c.getColumnIndex("arriveDate"));
         arriveTime = c.getString(c.getColumnIndex("arriveTime"));
         departDate = c.getString(c.getColumnIndex("departDate"));
         departTime = c.getString(c.getColumnIndex("departTime"));
-        flightNum = c.getInt(c.getColumnIndex("flightNum"));
-        cost = c.getDouble(c.getColumnIndex("cost"));
+        flightNum = c.getString(c.getColumnIndex("flightNum"));
+        cost = c.getString(c.getColumnIndex("cost"));
         travelTime = c.getString(c.getColumnIndex("travelTime"));
-    }
+        flightId = c.getInt(c.getColumnIndex("flightId"));
 
-    public void setTextFields(){
+
+        flightNumText = (TextView)findViewById(R.id.flightNumText);
+        destinationText = (TextView)findViewById(R.id.destinationText);
+        originText = (TextView)findViewById(R.id.originText);
+        departDateText = (TextView)findViewById(R.id.departDateText);
+        departTimeText = (TextView)findViewById(R.id.departTimeText);
+        arriveDateText = (TextView)findViewById(R.id.arriveDateText);
+        arriveTimeText = (TextView)findViewById(R.id.arriveTimeText);
+        costText = (TextView)findViewById(R.id.costText);
+        travelTimeText = (TextView)findViewById(R.id.travelTimeText);
+
         flightNumText.setText("Flight Number: " + flightNum);
         destinationText.setText("Destination: " + destination);
         originText.setText("Origin: " + origin);
@@ -87,8 +91,10 @@ public class BookFlight extends AppCompatActivity {
         arriveTimeText.setText("Arrive Time: " + arriveTime);
         travelTimeText.setText("Flight Time: " + travelTime);
         costText.setText("Price: $" + cost);
+
     }
     public void BookFlightButton(View view){
+        bookedFlight = new BookedFlight(userId, flightId);
         dbHelp.insertBookedFlight(bookedFlight, db);
         Toast.makeText(this, "Flight #" + flightNum + " has been booked!", Toast.LENGTH_LONG).show();
     }

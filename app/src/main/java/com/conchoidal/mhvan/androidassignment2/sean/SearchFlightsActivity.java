@@ -26,8 +26,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SearchFlightsActivity extends AppCompatActivity {
-    int flightNumber;
+    int flightId;
     int userId;
+    int flightNumberSend;
     //LIFECYCLE
     //##############################################################################################
     @Override
@@ -106,11 +107,11 @@ public class SearchFlightsActivity extends AppCompatActivity {
             int travelTime = cursor.getColumnIndex("travelTime");
             //iterate over results
             cursor.moveToFirst();
-            flightNumber = cursor.getColumnIndex("flightNum");
+            flightId = cursor.getColumnIndex("flightNum");
             while (!cursor.isAfterLast()) {
 
                 payload.add(cursor.getString(flightNum));
-
+                flightNumberSend = Integer.parseInt((cursor.getString(flightNum)));
                 payload.add(cursor.getString(departDate));
                 payload.add(cursor.getString(departTime));
 
@@ -173,15 +174,14 @@ public class SearchFlightsActivity extends AppCompatActivity {
             dst.setText(payload.get(6));
             cst.setText(payload.get(7));
             trblT.setText(payload.get(8));
-
         }
     }
 
     public void bookFlightBtn(View v) {
-        Log.i("Test", "bookFlightBtn() called");
+        Log.i("Test", "bookFlightBtn() called - num: " + flightNumberSend +" user id"+ userId);
         Intent i = new Intent(SearchFlightsActivity.this, BookFlight.class);
         i.putExtra("userId", userId);
-        i.putExtra("flightId", flightNumber);
+        i.putExtra("flightNumber", flightNumberSend);
         startActivity(i);
     }
 

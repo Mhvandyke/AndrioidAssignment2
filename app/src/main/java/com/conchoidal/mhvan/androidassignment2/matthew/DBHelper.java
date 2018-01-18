@@ -229,13 +229,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return isVaild;
     }
 
-    public Cursor returnFlightRow(int flightId, SQLiteDatabase db) {
-        String selectQuery = "SELECT * FROM table_flight WHERE flightId = " + flightId;
+    public Cursor returnFlightRow(int flightNumber, SQLiteDatabase db) {
+        String selectQuery = "SELECT * FROM table_flight WHERE flightNum = " + flightNumber;
         Cursor c;
         c = db.rawQuery(selectQuery, null);
         Log.d("Database", "1 : Cursor index = " + c);
         if (c == null) {
             Log.d("Database", "2 : Cursor == null!");
+
         }
         c.moveToFirst();
         Log.d("Database", "3 : Cursor index = " + c);
