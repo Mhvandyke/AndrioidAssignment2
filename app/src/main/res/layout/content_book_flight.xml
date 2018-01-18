@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.conchoidal.mhvan.androidassignment2.matthew.BookFlight"
+    tools:showIn="@layout/activity_book_flight">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Book Flight"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/flightNumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Flight Number:"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/destinationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Destination:"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/originText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Origin: "
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/departDateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Depart Date: "
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/departTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Depart Time:"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/arriveDateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Arrive Date: "
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/arriveTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Arrive Time:"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/travelTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Travel Time: "
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/costText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bookFlightButton"
+        android:layout_margin="5dp"
+        android:text="Price: "
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/bookFlightButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:onClick="BookFlightButton"
+        android:text="Book Flight"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:onClick="BackButton"
+        android:text="Back"
+        android:textSize="15sp" />
+
+</LinearLayout>
