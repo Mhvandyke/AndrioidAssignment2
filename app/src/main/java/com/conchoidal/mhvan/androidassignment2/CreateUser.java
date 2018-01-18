@@ -23,7 +23,7 @@ import com.conchoidal.mhvan.androidassignment2.matthew.User;
 public class CreateUser extends AppCompatActivity {
 
 
-    //private int userId;
+    private int userId;
     private static int nextUserId;
     private String email;
     private String password;
@@ -39,7 +39,7 @@ public class CreateUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
         Bundle extras = getIntent().getExtras();
-        firstName = extras.getString("firstName");
+        userId = extras.getInt("userId");
         lastName = extras.getString("lastName");
         email = extras.getString("email");
         password = extras.getString("password");
@@ -81,15 +81,8 @@ public class CreateUser extends AppCompatActivity {
 
             dbHelp.insertUser(user, db);
 
-            Intent i = new Intent(CreateUser.this, MainActivity.class);
-            i.putExtra("firstname", fName);
-            i.putExtra("lastname", lName);
-          //  i.putExtra("fName", );
-            i.putExtra("lName", lName);
-          //  i.putExtra();
-        //    i.putExtra("patientId", patient.getPatientId());
-
-         //   Log.d("Debug", "1 : patientId = " + patient.getPatientId());
+            Intent i = new Intent(CreateUser.this, MainMenu.class);
+            i.putExtra("userId", userId);
             startActivity(i);
 
         }
@@ -102,7 +95,7 @@ public class CreateUser extends AppCompatActivity {
         //Regex to compare against
         String textRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*"; //Used for names and department
         String creditRegex = "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$"; // Credit card regex
-        String emailRegex ="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        String emailRegex ="^(.+)@(.+)$";
         String postalRegex = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$"; // Used for Canadian Postal Codes
 
 
@@ -122,10 +115,10 @@ public class CreateUser extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Invalid email!", Toast.LENGTH_SHORT).show();
             return check;
         } else if (!credit.matches(creditRegex)) {
-            Toast.makeText(getApplicationContext(), "Invalid room number!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Invalid credit card number!", Toast.LENGTH_SHORT).show();
             return check;
         } else if (!postal.matches(postalRegex)) {
-            Toast.makeText(getApplicationContext(), "Invalid room number!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Invalid postal code!", Toast.LENGTH_SHORT).show();
             return check;
         } else {
             //Validation is successful

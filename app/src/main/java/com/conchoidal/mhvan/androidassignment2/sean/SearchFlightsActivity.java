@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.conchoidal.mhvan.androidassignment2.MainMenu;
 import com.conchoidal.mhvan.androidassignment2.matthew.*;
 import com.conchoidal.mhvan.androidassignment2.MainActivity;
 import com.conchoidal.mhvan.androidassignment2.R;
@@ -25,11 +26,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SearchFlightsActivity extends AppCompatActivity {
-
+    int flightNumber;
+    int userId;
     //LIFECYCLE
     //##############################################################################################
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        userId = extras.getInt("userId");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_flights);
 
@@ -82,8 +86,6 @@ public class SearchFlightsActivity extends AppCompatActivity {
         DBHelper openHelper = new DBHelper(getApplicationContext());
         SQLiteDatabase ass2DB = openHelper.getWritableDatabase();
 
-        //CALL UPGRADE HERE TO FORCE DATABASE CREATION FOR TESTING
-       // openHelper.onUpgrade(ass2DB, 1, 2);
 
         try {
             String query = "SELECT * FROM table_flight WHERE departDate = '" + department_field.getText().toString() + "' " +
@@ -102,11 +104,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
             int destination = cursor.getColumnIndex("destination");
             int cost = cursor.getColumnIndex("cost");
             int travelTime = cursor.getColumnIndex("travelTime");
-
             //iterate over results
             cursor.moveToFirst();
-
-
+            flightNumber = cursor.getColumnIndex("flightNum");
             while (!cursor.isAfterLast()) {
 
                 payload.add(cursor.getString(flightNum));
@@ -145,22 +145,22 @@ public class SearchFlightsActivity extends AppCompatActivity {
     }
 
     private void printPayload(List<String> payload){
-        for(int x = 0; x < payload.size(); x++){
+        for(int x = 0; x < payload.size(); x++) {
 
             //CHECK
             Log.d("msg", payload.get(x));
 
             //INSTANTIATE CONTROLS
-            TextView flNum = (TextView)findViewById(R.id.flight_num_field);
-            TextView depDay = (TextView)findViewById(R.id.depart_date_field);
-            TextView depTim = (TextView)findViewById(R.id.depart_time_field);
-            TextView arvD = (TextView)findViewById(R.id.arrive_date_field);
-            TextView arvT = (TextView)findViewById(R.id.arrive_time_field);
-            TextView org = (TextView)findViewById(R.id.origin_field_dis);
-            TextView dst = (TextView)findViewById(R.id.destination_field_dis);
-            TextView cst = (TextView)findViewById(R.id.cost_field);
-            TextView trblT = (TextView)findViewById(R.id.travel_time_field);
-            TextView err = (TextView)findViewById(R.id.error_label);
+            TextView flNum = (TextView) findViewById(R.id.flight_num_field);
+            TextView depDay = (TextView) findViewById(R.id.depart_date_field);
+            TextView depTim = (TextView) findViewById(R.id.depart_time_field);
+            TextView arvD = (TextView) findViewById(R.id.arrive_date_field);
+            TextView arvT = (TextView) findViewById(R.id.arrive_time_field);
+            TextView org = (TextView) findViewById(R.id.origin_field_dis);
+            TextView dst = (TextView) findViewById(R.id.destination_field_dis);
+            TextView cst = (TextView) findViewById(R.id.cost_field);
+            TextView trblT = (TextView) findViewById(R.id.travel_time_field);
+            TextView err = (TextView) findViewById(R.id.error_label);
 
 
             //DISPLAY TO TABLE
@@ -175,6 +175,14 @@ public class SearchFlightsActivity extends AppCompatActivity {
             trblT.setText(payload.get(8));
 
         }
+    }
+
+    public void bookFlightBtn(View v) {
+        Log.i("Test", "bookFlightBtn() called");
+        Intent i = new Intent(SearchFlightsActivity.this, BookFlight.class);
+        i.putExtra("userId", userId);
+        i.putExtra("flightId", flightNumber);
+        startActivity(i);
     }
 
 }

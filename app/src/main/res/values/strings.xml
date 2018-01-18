@@ -6,4 +6,8 @@
     <string name="login">Login</string>
     <string name="back">Back</string>
     <string name="submit">Submit</string>
+    <string name="search_flights">Search Flights</string>
+    <string name="view_flights">View Flights</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="book_flight">Book Flight</string>
 </resources>

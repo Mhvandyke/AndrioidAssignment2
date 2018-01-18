@@ -3,9 +3,13 @@ package com.conchoidal.mhvan.androidassignment2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import com.conchoidal.mhvan.androidassignment2.matthew.BookFlight;
+import com.conchoidal.mhvan.androidassignment2.matthew.BookedFlight;
 import com.conchoidal.mhvan.androidassignment2.matthew.Flight;
 import com.conchoidal.mhvan.androidassignment2.matthew.User;
+import com.conchoidal.mhvan.androidassignment2.sean.SearchFlightsActivity;
 
 
 public class MainMenu extends AppCompatActivity {
@@ -19,25 +23,19 @@ public class MainMenu extends AppCompatActivity {
         userId = extras.getInt("userId");
     }
 
-    private void ViewFlights() {
-        Intent i = new Intent(MainMenu.this, Flight.class);
+    public void viewFlightsBtn(View v) {
+        Intent i = new Intent(MainMenu.this, SearchFlightsActivity.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }
 
-    private void SearchFlights() {
-        Intent i = new Intent(MainMenu.this, Flight.class);
+    public void createUserBtn(View v) {
+        Intent i = new Intent(MainMenu.this, CreateUser.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }
-
-    private void CreateUser() {
-        Intent i = new Intent(MainMenu.this, User.class);
-        i.putExtra("userId", userId);
-        startActivity(i);
-    }
-    private void EditUser() {
-        Intent i = new Intent(MainMenu.this, User.class);
+    public void editUserBtn(View v) {
+        Intent i = new Intent(MainMenu.this, EditUser.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }

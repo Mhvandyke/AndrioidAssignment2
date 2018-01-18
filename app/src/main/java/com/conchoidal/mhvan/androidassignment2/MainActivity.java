@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         editPassword = (EditText) findViewById(R.id.editPassword);
         dbHelp = new DBHelper(getApplicationContext());
         db = dbHelp.getReadableDatabase();
-        dbHelp.onUpgrade(db, 1, 2);
     }
 
     public void loginClick(View v) {
