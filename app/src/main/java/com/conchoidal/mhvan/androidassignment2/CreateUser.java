@@ -23,32 +23,10 @@ import com.conchoidal.mhvan.androidassignment2.matthew.User;
 public class CreateUser extends AppCompatActivity {
 
 
-    private int userId;
-    private static int nextUserId;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String creditCard;
-    private String address;
-    private String postalCode;
-    private String userName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-        Bundle extras = getIntent().getExtras();
-        userId = extras.getInt("userId");
-        lastName = extras.getString("lastName");
-        email = extras.getString("email");
-        password = extras.getString("password");
-        creditCard = extras.getString("creditCard");
-        address = extras.getString("address");
-        postalCode = extras.getString("postalCode");
-        userName = extras.getString("userName");
-
-
     }
 
 
@@ -81,8 +59,7 @@ public class CreateUser extends AppCompatActivity {
 
             dbHelp.insertUser(user, db);
 
-            Intent i = new Intent(CreateUser.this, MainMenu.class);
-            i.putExtra("userId", userId);
+            Intent i = new Intent(CreateUser.this, MainActivity.class);
             startActivity(i);
 
         }

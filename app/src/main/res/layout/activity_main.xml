@@ -62,6 +62,22 @@
         android:layout_marginTop="47dp" />
 
     <Button
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="161dp"
+        android:layout_height="59dp"
+        android:layout_alignLeft="@+id/btnLogin"
+        android:layout_alignStart="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="26dp"
+        android:onClick="createAccountBtn"
+        android:text="@string/create_account"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="382dp" />
+
+    <Button
         android:id="@+id/btnLogin"
         android:layout_width="161dp"
         android:layout_height="59dp"
@@ -72,7 +88,8 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="111dp"
         tools:layout_editor_absoluteY="382dp"
+        android:layout_marginTop="43dp"
         android:layout_below="@+id/editPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp" />
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

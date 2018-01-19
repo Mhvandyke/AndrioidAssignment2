@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         DBHelper dbHelp = new DBHelper(getApplicationContext());
         SQLiteDatabase db = dbHelp.getReadableDatabase();
-        dbHelp.onUpgrade(db, 1, 2);
         Log.d("Database", "Database = " + db);
         Log.d("Database", "Username = " + username);
         Log.d("Database", "Password = " + password);
@@ -64,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void nextScreen(){
         Intent i = new Intent(MainActivity.this, MainMenu.class);
+        i.putExtra("userId", userId);
+        startActivity(i);
+    }
+
+    public void createAccountBtn(View v){
+        Intent i = new Intent(MainActivity.this, CreateUser.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }

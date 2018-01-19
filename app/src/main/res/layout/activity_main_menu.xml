@@ -10,9 +10,7 @@
         android:id="@+id/ViewFlights"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
-        android:layout_alignEnd="@+id/CreateUser"
         android:layout_alignLeft="@+id/EditUser"
-        android:layout_alignRight="@+id/CreateUser"
         android:layout_alignStart="@+id/EditUser"
         android:layout_below="@+id/EditUser"
         android:layout_marginTop="56dp"
@@ -22,22 +20,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="31dp" />
-
-    <Button
-        android:id="@+id/CreateUser"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
-        android:onClick="createUserBtn"
-        android:text="Create User"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="214dp"
-        android:layout_below="@+id/ViewFlights"
-        android:layout_alignLeft="@+id/EditUser"
-        android:layout_alignStart="@+id/EditUser" />
+        tools:layout_editor_absoluteY="31dp"
+        android:layout_alignRight="@+id/EditUser"
+        android:layout_alignEnd="@+id/EditUser" />
 
     <Button
         android:id="@+id/EditUser"

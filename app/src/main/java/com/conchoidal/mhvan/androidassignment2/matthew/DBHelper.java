@@ -86,21 +86,14 @@ public class DBHelper extends SQLiteOpenHelper {
             ")";
 
     public void onCreate(SQLiteDatabase db) {
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVers, int newVers) {
-        Log.d("Database", "Dropping tables if they exist");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FLIGHT);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKEDFLIGHT);
-
-        db.execSQL(CREATE_TABLE_FLIGHT);
         Log.d("Database", "Running statement: " + CREATE_TABLE_FLIGHT);
-        db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_TABLE_FLIGHT);
         Log.d("Database", "Running statement: " + CREATE_TABLE_USER);
-        db.execSQL(CREATE_TABLE_BOOKEDFLIGHT);
+        db.execSQL(CREATE_TABLE_USER);
         Log.d("Database", "Running statement: " + CREATE_TABLE_BOOKEDFLIGHT);
+        db.execSQL(CREATE_TABLE_BOOKEDFLIGHT);
+
+
 
         Log.d("Database", "Tables created!");
         //Create flights
@@ -130,6 +123,15 @@ public class DBHelper extends SQLiteOpenHelper {
         BookedFlight bookedFlight2 = new BookedFlight(user2.getUserId(), flight4.getFlightId());
         insertBookedFlight(bookedFlight1, db);
         insertBookedFlight(bookedFlight2, db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVers, int newVers) {
+        Log.d("Database", "Dropping tables if they exist");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FLIGHT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKEDFLIGHT);
+        onCreate(db);
     }
 
     public void insertUser (User user, SQLiteDatabase db ) {

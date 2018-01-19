@@ -10,4 +10,5 @@
     <string name="view_flights">View Flights</string>
     <string name="main_menu">Main Menu</string>
     <string name="book_flight">Book Flight</string>
+    <string name="create_account">Create Account</string>
 </resources>

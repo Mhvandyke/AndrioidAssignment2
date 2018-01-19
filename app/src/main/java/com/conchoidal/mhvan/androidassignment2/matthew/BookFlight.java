@@ -16,6 +16,7 @@ import android.util.Log;
 import com.conchoidal.mhvan.androidassignment2.MainActivity;
 import com.conchoidal.mhvan.androidassignment2.MainMenu;
 import com.conchoidal.mhvan.androidassignment2.R;
+import com.conchoidal.mhvan.androidassignment2.sean.SearchFlightsActivity;
 
 public class BookFlight extends AppCompatActivity {
     DBHelper dbHelp;
@@ -97,9 +98,12 @@ public class BookFlight extends AppCompatActivity {
         bookedFlight = new BookedFlight(userId, flightId);
         dbHelp.insertBookedFlight(bookedFlight, db);
         Toast.makeText(this, "Flight #" + flightNum + " has been booked!", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(BookFlight.this, MainMenu.class);
+        i.putExtra("userId", userId);
+        startActivity(i);
     }
     public void BackButton(View view){
-        Intent i = new Intent(BookFlight.this, MainMenu.class);
+        Intent i = new Intent(BookFlight.this, SearchFlightsActivity.class);
         i.putExtra("userId", userId);
         startActivity(i);
     }
